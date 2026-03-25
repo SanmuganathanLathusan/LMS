@@ -6,6 +6,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import CourseList from './pages/CourseList';
 import CourseDetail from './pages/CourseDetail';
+import Subscriptions from './pages/Subscriptions';
+import Enterprise from './pages/Enterprise';
+import TeachWithUs from './pages/TeachWithUs';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/courses" element={<CourseList />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="/enterprise" element={<Enterprise />} />
+          <Route path="/teach-with-us" element={<TeachWithUs />} />
           
           <Route path="/dashboard" element={
             <ProtectedRoute>
