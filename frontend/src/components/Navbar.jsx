@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { BookOpen, User, LogOut, Search, ShoppingCart, Globe, Check } from 'lucide-react';
+import { BookOpen, LogOut, Search, ShoppingCart, Globe, Check, Menu, X } from 'lucide-react';
 
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -22,6 +22,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [language, setLanguage] = useState('en');
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     // Load language from localStorage
@@ -69,11 +70,9 @@ const Navbar = () => {
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: newLanguage } }));
   };
 
-  const currentLanguage = LANGUAGES.find(lang => lang.code === language);
-
   return (
     <nav className="fixed w-full top-0 bg-white/80 backdrop-blur-lg border-b border-gray-100 z-50 h-[76px] flex items-center px-4 sm:px-8 transition-all duration-300 shadow-sm">
-      <div className="flex items-center justify-between w-full gap-4 lg:gap-8">
+      <div className="flex items-center justify-between w-full gap-4 lg:gap-8 relative">
         
         {/* Logo */}
         <div className="flex-shrink-0 flex items-center">
@@ -116,6 +115,15 @@ const Navbar = () => {
 
         {/* Right Side Controls */}
         <div className="flex items-center space-x-3 sm:space-x-5 ml-auto">
+          <button
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="lg:hidden text-gray-500 hover:text-primary-600 p-2 rounded-full hover:bg-primary-50 transition-colors"
+            title="Toggle Menu"
+            aria-label="Toggle menu"
+          >
+            {showMobileMenu ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+
           <button 
             onClick={handleCartClick}
             className="text-gray-500 hover:text-primary-600 hover:bg-primary-50 p-2 rounded-full transition-all hidden sm:block relative"
@@ -219,6 +227,40 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+        {showMobileMenu && (
+          <div className="absolute top-[72px] left-0 right-0 lg:hidden bg-white border border-gray-100 rounded-2xl shadow-xl p-4">
+            <div className="flex flex-col space-y-1">
+              <Link onClick={() => setShowMobileMenu(false)} to="/courses" className="px-3 py-2 rounded-lg font-semibold text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                Explore
+              </Link>
+              <Link onClick={() => setShowMobileMenu(false)} to="/subscriptions" className="px-3 py-2 rounded-lg font-semibold text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                Subscriptions
+              </Link>
+              <Link onClick={() => setShowMobileMenu(false)} to="/enterprise" className="px-3 py-2 rounded-lg font-semibold text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                Enterprise
+              </Link>
+              <Link onClick={() => setShowMobileMenu(false)} to="/teach-with-us" className="px-3 py-2 rounded-lg font-semibold text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                Teach with us
+              </Link>
+
+              {user ? (
+                <Link onClick={() => setShowMobileMenu(false)} to="/dashboard" className="px-3 py-2 rounded-lg font-semibold text-gray-700 hover:bg-primary-50 hover:text-primary-700">
+                  Dashboard
+                </Link>
+              ) : (
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <Link onClick={() => setShowMobileMenu(false)} to="/login" className="btn-secondary text-center text-sm">
+                    Log in
+                  </Link>
+                  <Link onClick={() => setShowMobileMenu(false)} to="/register" className="btn-primary text-center text-sm">
+                    Sign up
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
         
       </div>
     </nav>
