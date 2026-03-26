@@ -18,7 +18,7 @@ const CourseCard = ({ course }) => {
       <div className="p-5 flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-semibold uppercase tracking-wider text-primary-600 bg-primary-50 px-2 py-1 rounded">
-            Development
+            {course.category || 'Course'}
           </span>
           <div className="flex items-center text-yellow-500 text-sm">
             <Star className="w-4 h-4 fill-current mr-1" />
@@ -36,7 +36,7 @@ const CourseCard = ({ course }) => {
         <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
           <div className="flex items-center text-sm text-gray-500">
             <Clock className="w-4 h-4 mr-1" />
-            10h 30m
+            {course.duration || 'Self-paced'}
           </div>
           <Link to={`/courses/${course.id}`} className="text-primary-600 font-medium text-sm hover:underline">
             View Details &rarr;
