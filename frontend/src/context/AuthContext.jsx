@@ -34,6 +34,11 @@ export const AuthProvider = ({ children }) => {
           setUser(instructor);
           localStorage.setItem('lms_user', JSON.stringify(instructor));
           resolve(instructor);
+        } else if (email === 'admin@lms.com' && password === 'password') {
+          const admin = { id: 3, name: 'Admin User', email, role: 'admin', avatar: 'https://ui-avatars.com/api/?name=Admin+User&background=4f46e5&color=fff' };
+          setUser(admin);
+          localStorage.setItem('lms_user', JSON.stringify(admin));
+          resolve(admin);
         } else {
           reject('Invalid credentials');
         }
