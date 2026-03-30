@@ -1,16 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { ArrowRight, Sparkles, BookOpen, Star } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
 import { COURSES } from '../data/courses';
-
-const BACKGROUND_IMAGES = [
-  'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&auto=format&fit=crop&q=60',
-  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=60',
-  'https://images.unsplash.com/photo-1618477388954-7852f32655c7?w=1200&auto=format&fit=crop&q=60',
-  'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&auto=format&fit=crop&q=60',
-  'https://images.unsplash.com/photo-1526379095098-d400fd0bfce8?w=1200&auto=format&fit=crop&q=60',
-  'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=1200&auto=format&fit=crop&q=60'
-];
 
 const SPECIAL_OFFERS = [
   { id: 1, title: 'Summer Sale', discount: '50%', description: 'All courses half off this summer!', validity: 'Valid till June 30', color: 'from-orange-500 to-red-500 shadow-orange-500/30' },
@@ -20,44 +11,70 @@ const SPECIAL_OFFERS = [
 ];
 
 const Home = () => {
-  const [backgroundIndex, setBackgroundIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBackgroundIndex((prevIndex) => (prevIndex + 1) % BACKGROUND_IMAGES.length);
-    }, 5000); // Change image every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section 
-        className="bg-primary-50 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${BACKGROUND_IMAGES[backgroundIndex]}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          transition: 'background-image 1s ease-in-out'
-        }}
-      >
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-6 drop-shadow-lg">
-            Master New Skills with <span className="text-primary-300">PrimeLearn</span>
-          </h1>
-          <p className="max-w-2xl mx-auto items-center text-xl text-gray-100 mb-10 drop-shadow-md">
-            Join thousands of students learning modern web development, design, and more. 
-            Start your learning journey today!
-          </p>
-          <div className="flex justify-center space-x-4">
-            <Link to="/courses" className="btn-primary text-lg px-8 py-3">
-              Explore Courses
-            </Link>
-            <Link to="/register" className="btn-secondary text-lg px-8 py-3">
-              Become an Instructor
-            </Link>
+      <section className="relative w-full pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+        {/* Unique Background Mesh Gradients */}
+        <div className="absolute inset-0 w-full h-full -z-10 bg-white overflow-hidden">
+          <div className="absolute top-0 left-[-10%] w-[500px] h-[500px] rounded-full bg-primary-200/50 mix-blend-multiply filter blur-[100px] opacity-70 animate-blob"></div>
+          <div className="absolute top-0 right-[-5%] w-[400px] h-[400px] rounded-full bg-indigo-200/50 mix-blend-multiply filter blur-[100px] opacity-70 animate-blob" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute -bottom-32 left-[20%] w-[600px] h-[600px] rounded-full bg-sky-200/50 mix-blend-multiply filter blur-[120px] opacity-70 animate-blob" style={{ animationDelay: '4s' }}></div>
+          
+          {/* Subtle Grid Pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100/50 text-primary-600 font-medium text-sm mb-8 shadow-sm">
+              <Sparkles className="w-4 h-4" />
+              <span>Transform your future today</span>
+            </div>
+            
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-8 leading-[1.1]">
+              Master New Skills with <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">PrimeLearn</span>
+            </h1>
+            
+            <p className="max-w-2xl mx-auto text-xl text-gray-600 mb-12 leading-relaxed">
+              Join thousands of students learning modern web development, design, and more. 
+              Elevate your career with world-class courses and expert instructors.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <Link to="/courses" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-semibold text-lg hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 flex items-center justify-center gap-2 group">
+                Explore Courses
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link to="/register" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white border-2 border-gray-100 hover:border-gray-200 text-gray-700 font-semibold text-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2">
+                Become an Instructor
+              </Link>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-500">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4].map(i => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center overflow-hidden">
+                      <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" />
+                    </div>
+                  ))}
+                </div>
+                <div className="text-sm text-left leading-tight ml-2">
+                  <div className="flex items-center text-yellow-400">
+                    <Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" />
+                  </div>
+                  <span className="font-semibold text-gray-900">10k+</span> students
+                </div>
+              </div>
+              <div className="hidden sm:block w-1 h-1 rounded-full bg-gray-300"></div>
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-gray-400" />
+                <span><strong className="text-gray-900">500+</strong> Premium Courses</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
