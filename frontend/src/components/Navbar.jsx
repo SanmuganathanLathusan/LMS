@@ -92,7 +92,7 @@ const Navbar = () => {
 
         {/* Search Bar */}
         <div className="flex-1 max-w-2xl hidden md:block">
-          <div className="relative flex items-center w-full h-11 rounded-2xl bg-gray-100/80 border border-transparent hover:bg-gray-100 hover:border-gray-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-primary-100 focus-within:border-primary-500 transition-all duration-200 overflow-hidden">
+          <div className="relative flex items-center w-full h-11 rounded-full bg-gray-100/80 border border-transparent hover:bg-gray-100 hover:border-gray-200 hover:shadow-inner focus-within:bg-white focus-within:ring-2 focus-within:ring-primary-100 focus-within:border-primary-500 focus-within:shadow-sm transition-all duration-300 overflow-hidden">
             <div className="pl-4 pr-3 text-gray-400">
               <Search className="h-4 w-4" />
             </div>

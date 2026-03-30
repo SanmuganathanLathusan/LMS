@@ -13,10 +13,10 @@ const BACKGROUND_IMAGES = [
 ];
 
 const SPECIAL_OFFERS = [
-  { id: 1, title: 'Summer Sale', discount: '50%', description: 'All courses half off this summer!', validity: 'Valid till June 30', color: 'from-red-500 to-pink-500' },
-  { id: 2, title: 'Bundle Deal', discount: '40%', description: 'Buy 3 courses, get 40% off total', validity: 'Limited time offer', color: 'from-blue-500 to-cyan-500' },
-  { id: 3, title: 'New Member', discount: '60%', description: 'First course purchase for new members', validity: 'One time use', color: 'from-green-500 to-emerald-500' },
-  { id: 4, title: 'Referral Bonus', discount: '₹500', description: 'Earn ₹500 for each friend referred', validity: 'Unlimited earnings', color: 'from-purple-500 to-indigo-500' }
+  { id: 1, title: 'Summer Sale', discount: '50%', description: 'All courses half off this summer!', validity: 'Valid till June 30', color: 'from-orange-500 to-red-500 shadow-orange-500/30' },
+  { id: 2, title: 'Bundle Deal', discount: '40%', description: 'Buy 3 courses, get 40% off total', validity: 'Limited time offer', color: 'from-blue-500 to-cyan-500 shadow-blue-500/30' },
+  { id: 3, title: 'New Member', discount: '60%', description: 'First course purchase for new members', validity: 'One time use', color: 'from-green-500 to-emerald-500 shadow-green-500/30' },
+  { id: 4, title: 'Referral Bonus', discount: '₹500', description: 'Earn ₹500 for each friend referred', validity: 'Unlimited earnings', color: 'from-purple-500 to-indigo-500 shadow-purple-500/30' }
 ];
 
 const Home = () => {
@@ -68,15 +68,15 @@ const Home = () => {
           <h2 className="text-3xl font-bold text-white mb-12 tracking-tight text-center">Special Offers & Deals</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {SPECIAL_OFFERS.map(offer => (
-              <div key={offer.id} className={`bg-gradient-to-br ${offer.color} rounded-lg p-6 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer`}>
+              <div key={offer.id} className={`bg-gradient-to-br ${offer.color} rounded-2xl p-6 text-white shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer border border-white/10 group`}>
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{offer.title}</h3>
+                    <h3 className="text-xl font-bold mb-2 group-hover:translate-x-1 transition-transform">{offer.title}</h3>
                     <p className="text-sm opacity-90">{offer.description}</p>
                   </div>
                 </div>
                 <div className="border-t border-white border-opacity-20 pt-4 mt-4">
-                  <div className="text-4xl font-extrabold mb-2">{offer.discount}</div>
+                  <div className="text-4xl font-extrabold mb-2 group-hover:scale-105 origin-left transition-transform">{offer.discount}</div>
                   <p className="text-xs opacity-75 italic">{offer.validity}</p>
                 </div>
               </div>
