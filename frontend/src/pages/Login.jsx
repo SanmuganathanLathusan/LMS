@@ -12,6 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/dashboard';
+  const successMessage = location.state?.message;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +36,11 @@ const Login = () => {
           <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {successMessage && (
+            <div className="bg-green-50 text-green-700 p-3 rounded-md text-sm text-center mb-4">
+              {successMessage}
+            </div>
+          )}
           {error && (
             <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">
               {error}
