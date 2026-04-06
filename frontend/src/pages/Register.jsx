@@ -26,7 +26,8 @@ const Register = () => {
     
     try {
       await register(name, email, password, role);
-      navigate('/dashboard');
+      // Navigate to login after successful register as requested
+      navigate('/login', { state: { message: "Registration successful! Please sign in." } });
     } catch (err) {
       setError(err || 'Failed to create an account. Please try again.');
     } finally {
