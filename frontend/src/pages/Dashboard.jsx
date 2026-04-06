@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext';
-import UserDashboard from './UserDashboard';
+import StudentDashboard from './StudentDashboard';
+import InstructorDashboard from './InstructorDashboard';
 import AdminDashboard from './AdminDashboard';
 
 const Dashboard = () => {
@@ -9,7 +10,12 @@ const Dashboard = () => {
     return <AdminDashboard />;
   }
 
-  return <UserDashboard />;
+  if (user?.role === 'instructor') {
+    return <InstructorDashboard />;
+  }
+
+  return <StudentDashboard />;
 };
 
 export default Dashboard;
+
