@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, Sparkles, BookOpen, Star } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
 import { COURSES } from '../data/courses';
@@ -11,6 +12,8 @@ const SPECIAL_OFFERS = [
 ];
 
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
@@ -29,26 +32,25 @@ const Home = () => {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100/50 text-primary-600 font-medium text-sm mb-8 shadow-sm">
               <Sparkles className="w-4 h-4" />
-              <span>Transform your future today</span>
+              <span>{t('home.heroBadge')}</span>
             </div>
             
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 tracking-tight mb-8 leading-[1.1]">
-              Master New Skills with <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">PrimeLearn</span>
+              {t('home.heroTitleStart')} <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-indigo-600">{t('home.heroTitleBrand')}</span>
             </h1>
             
             <p className="max-w-2xl mx-auto text-xl text-gray-600 mb-12 leading-relaxed">
-              Join thousands of students learning modern web development, design, and more. 
-              Elevate your career with world-class courses and expert instructors.
+              {t('home.heroSubtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <Link to="/courses" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-semibold text-lg hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 flex items-center justify-center gap-2 group">
-                Explore Courses
+                {t('home.exploreBtn')}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link to="/register" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white border-2 border-gray-100 hover:border-gray-200 text-gray-700 font-semibold text-lg hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2">
-                Become an Instructor
+                {t('home.instructorBtn')}
               </Link>
             </div>
 
@@ -66,13 +68,13 @@ const Home = () => {
                   <div className="flex items-center text-yellow-400">
                     <Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" /><Star className="w-3 h-3 fill-current" />
                   </div>
-                  <span className="font-semibold text-gray-900">10k+</span> students
+                  <span className="font-semibold text-gray-900">10k+</span> {t('home.trustStudents')}
                 </div>
               </div>
               <div className="hidden sm:block w-1 h-1 rounded-full bg-gray-300"></div>
               <div className="flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-gray-400" />
-                <span><strong className="text-gray-900">500+</strong> Premium Courses</span>
+                <span><strong className="text-gray-900">500+</strong> {t('home.trustCourses')}</span>
               </div>
             </div>
           </div>
@@ -82,7 +84,7 @@ const Home = () => {
       {/* Special Offers Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-gray-900 to-gray-800 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-12 tracking-tight text-center">Special Offers & Deals</h2>
+          <h2 className="text-3xl font-bold text-white mb-12 tracking-tight text-center">{t('home.offersTitle')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {SPECIAL_OFFERS.map(offer => (
               <div key={offer.id} className={`bg-gradient-to-br ${offer.color} rounded-2xl p-6 text-white shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer border border-white/10 group`}>
@@ -105,7 +107,7 @@ const Home = () => {
       {/* Featured Courses */}
       <section className="py-16 px-4 bg-white sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 tracking-tight">Featured Courses</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 tracking-tight">{t('home.featuredTitle')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {COURSES.map(course => (
               <CourseCard key={course.id} course={course} />
