@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { BookOpen, LogOut, Search, ShoppingCart, Globe, Check, Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -19,14 +20,15 @@ const LANGUAGES = [
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState(i18n.language || 'en');
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     // Load language from localStorage
-    const savedLanguage = localStorage.getItem('language') || 'en';
+    const savedLanguage = localStorage.getItem('i18nextLng') || 'en';
     setLanguage(savedLanguage);
   }, []);
 
@@ -64,10 +66,8 @@ const Navbar = () => {
 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    localStorage.setItem('language', newLanguage);
+    i18n.changeLanguage(newLanguage);
     setShowLanguageMenu(false);
-    // Trigger language change event (you can use context to propagate this globally)
-    window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: newLanguage } }));
   };
 
   return (
@@ -86,8 +86,8 @@ const Navbar = () => {
 
         {/* Links (Left) */}
         <div className="hidden xl:flex items-center space-x-6">
-          <Link to="/courses" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">Explore</Link>
-          <Link to="/subscriptions" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">Subscriptions</Link>
+          <Link to="/courses" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">{t('navbar.explore')}</Link>
+          <Link to="/subscriptions" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">{t('navbar.subscriptions')}</Link>
         </div>
 
         {/* Search Bar */}
@@ -98,7 +98,7 @@ const Navbar = () => {
             </div>
             <input
               type="text"
-              placeholder="Search for courses, skills, or mentors..."
+              placeholder={t('navbar.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={handleSearch}
@@ -109,8 +109,8 @@ const Navbar = () => {
 
         {/* Links (Right) & Icons */}
         <div className="hidden lg:flex items-center space-x-6">
-          <Link to="/enterprise" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">Enterprise</Link>
-          <Link to="/teach-with-us" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">Teach with us</Link>
+          <Link to="/enterprise" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">{t('navbar.enterprise')}</Link>
+          <Link to="/teach-with-us" className="text-gray-600 hover:text-primary-600 text-sm font-semibold transition-colors">{t('navbar.teachWithUs')}</Link>
         </div>
 
         {/* Right Side Controls */}
@@ -136,7 +136,7 @@ const Navbar = () => {
           {user ? (
             <div className="flex items-center space-x-3 sm:space-x-4 pl-2 border-l border-gray-200">
               <Link to="/dashboard" className="text-gray-600 hover:text-primary-600 text-sm font-semibold hidden sm:block">
-                Dashboard
+                {t('navbar.dashboard')}
               </Link>
               <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity">
                 <img src={user.avatar} alt="Avatar" className="w-10 h-10 rounded-full border-2 border-primary-100 shadow-sm" />
@@ -186,10 +186,10 @@ const Navbar = () => {
           ) : (
              <div className="flex items-center space-x-3 pl-2 sm:border-l sm:border-gray-200">
               <Link to="/login" className="btn-secondary text-sm font-semibold py-2 px-5 !rounded-xl hidden sm:block">
-                Log in
+                {t('navbar.login')}
               </Link>
               <Link to="/register" className="btn-primary text-sm font-semibold py-2 px-5 shadow-md shadow-primary-500/20 !rounded-xl">
-                Sign up
+                {t('navbar.signup')}
               </Link>
               
               {/* Language Selector */}
