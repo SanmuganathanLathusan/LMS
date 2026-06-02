@@ -7,7 +7,7 @@ Built using **React**, **Laravel**, and **SQL**, PrimeLearn provides a powerful 
 ---
 ## 🚀 Live Demo
 Experience the platform in action:  
-🔗 **[ Demo  )](https://youtu.be/QatqBlzc6oc)**
+🔗 **[ Demo Video](https://youtu.be/QatqBlzc6oc)**
 
 ---
 
